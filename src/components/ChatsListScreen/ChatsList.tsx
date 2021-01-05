@@ -58,36 +58,36 @@ const MessageDate = styled.div`
 `;
 
 const ChatsList = () => {
-    const [chats, setChats] = useState<any[]>([]);
+  const [chats, setChats] = useState<any[]>([]);
 
-    useMemo(async () => {
-        const body = await fetch(`${process.env.REACT_APP_SERVER_URL}/chats`);
-        const chats = await body.json();
-        setChats(chats);
-    }, []);
+  useMemo(async () => {
+    const body = await fetch(`${process.env.REACT_APP_SERVER_URL}/chats`);
+    const chats = await body.json();
+    setChats(chats);
+  }, []);
 
-    return (
-        <Container>
-            <StyledList>
-                {chats.map((chat) => (
-                    <StyledListItem key={chat!.id} button>
-                        <ChatPicture src={chat.picture} alt="Profile" />
-                        <ChatInfo>
-                            <ChatName>{chat.name}</ChatName>
-                            {chat.lastMessage && (
-                                <React.Fragment>
-                                    <MessageContent>{chat.lastMessage.content}</MessageContent>
-                                    <MessageDate>
-                                        {moment(chat.lastMessage.createdAt).format('HH:mm')}
-                                    </MessageDate>
-                                </React.Fragment>
-                            )}
-                        </ChatInfo>
-                    </StyledListItem>
-                ))}
-            </StyledList>
-        </Container>
-    );
+  return (
+    <Container>
+      <StyledList>
+        {chats.map((chat) => (
+          <StyledListItem key={chat!.id} button>
+            <ChatPicture src={chat.picture} alt="Profile" />
+            <ChatInfo>
+              <ChatName>{chat.name}</ChatName>
+              {chat.lastMessage && (
+                <React.Fragment>
+                  <MessageContent>{chat.lastMessage.content}</MessageContent>
+                  <MessageDate>
+                    {moment(chat.lastMessage.createdAt).format('HH:mm')}
+                  </MessageDate>
+                </React.Fragment>
+              )}
+            </ChatInfo>
+          </StyledListItem>
+        ))}
+      </StyledList>
+    </Container>
+  );
 };
 
 export default ChatsList;
